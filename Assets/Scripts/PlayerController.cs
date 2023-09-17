@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
 
+    public bool dash = false;
+
     public GameObject BulletPrefab;
 
     public Camera playerCamera;
@@ -37,10 +39,20 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if(Input.GetKey(KeyCode.LeftShift))
+            dash = true;
+        else
+            dash = false;
+
         float _moveDirX = Input.GetAxisRaw("Horizontal");
         float _moveDirZ = Input.GetAxisRaw("Vertical");
 
-        transform.Translate(_moveDirX * moveSpeed * Time.deltaTime,0,_moveDirZ * moveSpeed * Time.deltaTime);
+        if (dash)
+        {
+            transform.Translate(_moveDirX * 3 * moveSpeed * Time.deltaTime,0,_moveDirZ * 3 *moveSpeed * Time.deltaTime);
+        }else
+            transform.Translate(_moveDirX * moveSpeed * Time.deltaTime,0,_moveDirZ *moveSpeed * Time.deltaTime);
+
     }
 
     private void RotateOnMouseInput()
