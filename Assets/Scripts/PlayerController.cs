@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public bool dash = false;
 
-    public GameObject BulletPrefab;
+    public GameObject bulletPrefab;
+    public GameObject specialBulletPrefab;
 
     public Camera playerCamera;
 
@@ -70,11 +71,18 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0) )
         {
             Shoot();
+        }else if (Input.GetMouseButtonDown(1))
+        {
+            ShootSpecialBullet();
         }
     }
 
     void Shoot()
     {
-        Instantiate(BulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
+        Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
+    }
+    void ShootSpecialBullet()
+    {
+        Instantiate(specialBulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
     }
 }
