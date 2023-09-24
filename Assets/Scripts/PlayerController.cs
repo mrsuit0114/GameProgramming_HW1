@@ -18,13 +18,16 @@ public class PlayerController : MonoBehaviour
 
     public float sensitivity = 500f;
 
+    private Rigidbody rb;
+
     public float rotationX;
     public float rotationY;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         hp = 100;
-        moveSpeed = 10f;
+        moveSpeed = 1000f;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -50,9 +53,11 @@ public class PlayerController : MonoBehaviour
 
         if (dash)
         {
-            transform.Translate(_moveDirX * 3 * moveSpeed * Time.deltaTime,0,_moveDirZ * 3 *moveSpeed * Time.deltaTime);
+            rb.AddRelativeForce(_moveDirX * 3* moveSpeed * Time.deltaTime, 0, _moveDirZ * 3* moveSpeed * Time.deltaTime);
+            //transform.Translate(_moveDirX * 3 * moveSpeed * Time.deltaTime,0,_moveDirZ * 3 *moveSpeed * Time.deltaTime);
         }else
-            transform.Translate(_moveDirX * moveSpeed * Time.deltaTime,0,_moveDirZ *moveSpeed * Time.deltaTime);
+            rb.AddRelativeForce(_moveDirX * moveSpeed * Time.deltaTime, 0, _moveDirZ * moveSpeed * Time.deltaTime);
+            //transform.Translate(_moveDirX * moveSpeed * Time.deltaTime,0,_moveDirZ *moveSpeed * Time.deltaTime);
 
     }
 
