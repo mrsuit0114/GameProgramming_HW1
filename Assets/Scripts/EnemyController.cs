@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
             // Generate a random direction
             float randomAngle = Random.Range(0f, 360f);
             currentDirection = Quaternion.Euler(0f, -randomAngle, 0f) * Vector3.right;
+            Debug.Log(currentDirection);
 
             // Move in the current direction for a random duration
             float moveDuration = Random.Range(1f, 4f); // Adjust as needed
@@ -38,5 +39,4 @@ public class EnemyController : MonoBehaviour
             yield return null; // Yield for one frame before generating a new direction
         }
     }
-
 }
