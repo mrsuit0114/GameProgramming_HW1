@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    public ParticleSystem shotParticle;
     public float rotationX;
     public float rotationY;
 
@@ -85,9 +86,11 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
+        shotParticle.Play();
     }
     void ShootSpecialBullet()
     {
         Instantiate(specialBulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
+        shotParticle.Play();
     }
 }

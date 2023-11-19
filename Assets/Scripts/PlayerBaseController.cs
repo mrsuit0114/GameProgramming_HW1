@@ -13,6 +13,7 @@ public class PlayerBaseController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gm.LoadLoseScene();
+        if(other.CompareTag("Enemy"))
+            gm.LoadLoseScene();
     }
 }

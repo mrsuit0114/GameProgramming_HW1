@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private GameObject target1;
     private GameObject target2;
 
+    public GameObject dieParticle;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -65,5 +67,10 @@ public class EnemyController : MonoBehaviour
     {
         curTarget = Random.Range(0, 2) == 0 ? target1 : target2;
         StopCoroutine(MoveRandomly());
+    }
+
+    private void OnDestroy()
+    {
+        GameObject p = Instantiate(dieParticle, transform.position+ Vector3.up * 1.5f, Quaternion.identity);
     }
 }
