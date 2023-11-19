@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 6998c455e178e3a42b43376cfa1cda7e, type: 2}
 --- !u!43 &9171584
 Mesh:
   m_ObjectHideFlags: 0
@@ -48414,6 +48414,33 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1815814988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4674792524455371606, guid: 8bde2e1316e8d5243a92fbadf80a5f32, type: 3}
+  m_PrefabInstance: {fileID: 4674792523201179854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1815814993
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815814988}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1834461099
 GameObject:
   m_ObjectHideFlags: 0
@@ -57658,6 +57685,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2720161750863990607, guid: 8bde2e1316e8d5243a92fbadf80a5f32, type: 3}
+      propertyPath: m_Name
+      value: PlayerObject
+      objectReference: {fileID: 0}
     - target: {fileID: 4304718313610053002, guid: 8bde2e1316e8d5243a92fbadf80a5f32, type: 3}
       propertyPath: m_Mass
       value: 1

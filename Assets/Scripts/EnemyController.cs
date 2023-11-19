@@ -1,17 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
     public float destroyLimit = 16f;
     public float moveSpeed = 2f; // Adjust the speed as needed
     private Vector3 currentDirection;
+    [SerializeField]
+    private GameObject curTarget;
+    private NavMeshAgent agent;
+    private GameObject target1;
+    private GameObject target2;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        target1 = GameObject.Find("Player").transform.Find("PlayerObject").gameObject;
+        target2 = GameObject.Find("PlayerBase");
+    }
 
     private void Start()
     {
         Destroy(gameObject, destroyLimit);
         StartCoroutine(MoveRandomly());
+        Invoke("TargetOn", 5f);
+    }
+
+    private void Update()
+    {
+        if(curTarget != null)
+        {
+            agent.SetDestination(curTarget.transform.position);
+        }
     }
 
     private IEnumerator MoveRandomly()
@@ -39,4 +61,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void TargetOn()
+    {
+        curTarget = Random.Range(0, 2) == 0 ? target1 : target2;
+        StopCoroutine(MoveRandomly());
+    }
 }
