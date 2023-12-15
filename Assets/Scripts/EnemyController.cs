@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
 
     public GameObject dieParticle;
 
+    private SoundPlayerController spController;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -25,6 +27,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        spController = GameObject.Find("SoundPlayer").GetComponent<SoundPlayerController>();
         Destroy(gameObject, destroyLimit);
         StartCoroutine(MoveRandomly());
         Invoke("TargetOn", 5f);
@@ -71,6 +74,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDestroy()
     {
+        spController.PlayDestroySound();
         GameObject p = Instantiate(dieParticle, transform.position+ Vector3.up * 1.5f, Quaternion.identity);
     }
 }

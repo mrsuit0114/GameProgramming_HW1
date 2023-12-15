@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,8 +25,18 @@ public class PlayerController : MonoBehaviour
     public float rotationX;
     public float rotationY;
 
+    public AudioClip shotSound;
+
+    [SerializeField]
+    private GameObject pauseMenu;
+
+    private Animator playerAnimator;
+
+    private bool isGamePaused = false;
+
     void Start()
     {
+        playerAnimator = transform.Find("PlayerObject").GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         hp = 100;
         moveSpeed = 1000f;
@@ -58,7 +69,18 @@ public class PlayerController : MonoBehaviour
             //transform.Translate(_moveDirX * 3 * moveSpeed * Time.deltaTime,0,_moveDirZ * 3 *moveSpeed * Time.deltaTime);
         }else
             rb.AddRelativeForce(_moveDirX * moveSpeed * Time.deltaTime, 0, _moveDirZ * moveSpeed * Time.deltaTime);
-            //transform.Translate(_moveDirX * moveSpeed * Time.deltaTime,0,_moveDirZ *moveSpeed * Time.deltaTime);
+        //transform.Translate(_moveDirX * moveSpeed * Time.deltaTime,0,_moveDirZ *moveSpeed * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            if (isGamePaused)
+                Resume();
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            if (!isGamePaused)
+                GamePause();
+        }
 
     }
 
@@ -87,10 +109,26 @@ public class PlayerController : MonoBehaviour
     {
         Instantiate(bulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
         shotParticle.Play();
+        GetComponent<AudioSource>().PlayOneShot(shotSound);
     }
     void ShootSpecialBullet()
     {
         Instantiate(specialBulletPrefab, new Vector3(transform.position.x, transform.position.y+2.5f,transform.position.z), transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(shotSound);
         shotParticle.Play();
+    }
+
+    public void GamePause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        isGamePaused = true;
+    }
+
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        isGamePaused = false;
     }
 }
